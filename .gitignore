@@ -1,0 +1,12 @@
+# Ignore large data files
+*.db3
+*.bag
+*.mcap
+
+# Ignore build artifacts
+build/
+install/
+log/
+
+# Ignore system files
+.DS_Store

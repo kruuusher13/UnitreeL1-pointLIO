@@ -1,0 +1,34 @@
+{
+    "name": "Point-LIO Dev",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "privileged": true,
+    "remoteUser": "root",
+    
+    // Expose the port for Foxglove Studio
+    "forwardPorts": [8765],
+
+    // Install recommended VS Code extensions
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-python.python",
+                "ms-iot.vscode-ros",
+                "twxs.cmake",
+                "yzhang.markdown-all-in-one"
+            ]
+        }
+    },
+
+    // Use host networking to simplify ROS communication
+    "runArgs": [
+        "--network=host",
+        "--ipc=host"
+    ],
+
+    "postCreateCommand": "rosdep update && rosdep install --from-paths src --ignore-src -r -y && colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release"
+
+}
